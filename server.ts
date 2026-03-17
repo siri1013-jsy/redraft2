@@ -5,7 +5,6 @@ import dotenv from 'dotenv';
 import multer from 'multer';
 import pdfParse from 'pdf-parse';
 import mammoth from 'mammoth';
-import { createWorker } from 'tesseract.js';
 import { fileURLToPath } from 'url';
 
 // 强制从“项目根目录”读取 .env（Windows 上更稳）
@@ -108,6 +107,8 @@ async function extractTextFromFile(file: Express.Multer.File): Promise<{
   }
 
   if (isImage) {
+    // Lazy import to keep serverless startup lightweight and avoid optional dependency crashes.
+    const { createWorker } = await import('tesseract.js');
     const worker = await createWorker('chi_sim+eng');
     try {
       const { data } = await worker.recognize(file.buffer);
