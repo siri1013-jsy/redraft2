@@ -1,0 +1,5 @@
+{
+  "name": "Redraft - 岗位定制简历生成器",
+  "description": "Redraft 是一款专为学生设计的简历定制工具，通过分析目标岗位 JD，将您的原始经历精准改写为高匹配度的岗位定制简历草稿。",
+  "requestFramePermissions": []
+}

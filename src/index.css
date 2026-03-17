@@ -1,0 +1,153 @@
+@import "tailwindcss";
+
+@theme {
+  --color-brand-50: #f4f8fc;
+  --color-brand-100: #e8f0f8;
+  --color-brand-500: #5f87b6;
+  --color-brand-600: #4e769f;
+  --color-brand-700: #3e6388;
+  
+  --color-slate-50: #f8fafc;
+  --color-slate-100: #f1f5f9;
+  --color-slate-200: #e2e8f0;
+  --color-slate-300: #cbd5e1;
+  --color-slate-400: #94a3b8;
+  --color-slate-500: #64748b;
+  --color-slate-600: #475569;
+  --color-slate-700: #334155;
+  --color-slate-800: #1e293b;
+  --color-slate-900: #0f172a;
+
+  --radius-xl: 0.75rem;
+  --radius-2xl: 1rem;
+}
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+  }
+  body {
+    @apply text-slate-900 antialiased;
+    font-family: "IBM Plex Sans", "PingFang SC", "Noto Sans SC", "Microsoft YaHei", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    background:
+      radial-gradient(circle at 14% 8%, rgba(95, 135, 182, 0.08), transparent 35%),
+      radial-gradient(circle at 86% 92%, rgba(15, 23, 42, 0.03), transparent 30%),
+      #f9fbfd;
+  }
+}
+
+@keyframes highlight-pulse {
+  0% { box-shadow: 0 0 0 0 rgba(59, 130, 246, 0); border-color: var(--color-slate-200); }
+  50% { box-shadow: 0 0 0 4px rgba(59, 130, 246, 0.1); border-color: var(--color-brand-500); }
+  100% { box-shadow: 0 0 0 0 rgba(59, 130, 246, 0); border-color: var(--color-slate-200); }
+}
+
+.animate-highlight {
+  animation: highlight-pulse 1.5s ease-in-out;
+}
+
+.glass-card {
+  @apply bg-white/88 backdrop-blur-md border border-slate-200/70 shadow-sm rounded-2xl;
+}
+
+.upload-zone {
+  @apply border border-dashed border-slate-200 rounded-2xl p-8 flex flex-col items-center justify-center gap-3 transition-all duration-200 cursor-pointer hover:border-brand-500 hover:bg-brand-50/35;
+}
+
+.input-field {
+  @apply w-full px-4 py-3 bg-slate-50/90 border border-slate-200 rounded-xl outline-none transition-all duration-200 focus:bg-white focus:border-brand-500 focus:ring-4 focus:ring-brand-500/10 text-sm text-slate-700;
+}
+
+.btn-primary {
+  @apply px-6 py-2.5 bg-brand-600 hover:bg-brand-700 text-white font-medium rounded-xl transition-all duration-200 shadow-sm shadow-brand-500/20 active:scale-[0.98];
+}
+
+.btn-secondary {
+  @apply px-6 py-2.5 bg-white border border-slate-200 hover:bg-slate-50 text-slate-700 font-medium rounded-xl transition-all duration-200 active:scale-[0.98];
+}
+
+.section-title {
+  @apply text-xs font-semibold uppercase tracking-wider text-slate-400 mb-4;
+}
+
+.resume-card {
+  @apply bg-white border border-slate-200/80 shadow-md shadow-slate-200/40 rounded-2xl p-8;
+}
+
+.keyword-chip {
+  @apply inline-flex items-center rounded-full bg-white border border-slate-200 px-2.5 py-1 text-[11px] font-semibold text-slate-600;
+}
+
+.workspace-shell {
+  @apply relative;
+}
+
+.workspace-shell::before {
+  content: "";
+  @apply absolute right-0 top-20 w-[52%] h-[76%] rounded-[2rem] border border-slate-200/70 bg-white/60 -z-10;
+  box-shadow: 0 18px 48px -32px rgba(15, 23, 42, 0.22);
+}
+
+.result-panel .resume-card {
+  @apply bg-white border-slate-200 shadow-lg;
+  box-shadow: 0 20px 54px -34px rgba(15, 23, 42, 0.28);
+}
+
+.module-title {
+  @apply text-sm font-semibold text-slate-700 tracking-wide;
+}
+
+.version-item {
+  @apply w-full rounded-xl border border-slate-200 bg-white px-3 py-2.5 text-left transition-all duration-200 hover:border-brand-500/60 hover:bg-brand-50/30;
+}
+
+.version-item-active {
+  @apply border-brand-500/70 bg-brand-50/55;
+}
+
+.version-tag {
+  @apply inline-flex items-center rounded-full bg-slate-100 px-2 py-0.5 text-[11px] font-semibold text-slate-600;
+}
+
+.version-subtag {
+  @apply inline-flex items-center rounded-full bg-brand-50 px-2 py-0.5 text-[10px] font-medium text-brand-600;
+}
+
+.input-zone-label {
+  @apply text-xs font-semibold tracking-wide;
+}
+
+.input-zone-job {
+  @apply text-brand-600;
+}
+
+.input-zone-profile {
+  @apply text-slate-500;
+}
+
+.job-card {
+  @apply border-brand-100 bg-brand-50/40;
+}
+
+.profile-card {
+  @apply border-slate-200 bg-white/88;
+}
+
+.result-editor {
+  @apply w-full rounded-xl border border-slate-200 bg-slate-50/65 px-4 py-3 text-sm leading-relaxed text-slate-700 outline-none transition-all duration-200 resize-y;
+}
+
+.result-editor:focus {
+  @apply border-brand-500 bg-white ring-4 ring-brand-500/10;
+}
+
+/* Custom scrollbar for a cleaner look */
+::-webkit-scrollbar {
+  width: 6px;
+}
+::-webkit-scrollbar-track {
+  @apply bg-transparent;
+}
+::-webkit-scrollbar-thumb {
+  @apply bg-slate-200 rounded-full hover:bg-slate-300 transition-colors;
+}
