@@ -3,8 +3,6 @@ import path from 'path';
 import fs from 'fs';
 import dotenv from 'dotenv';
 import multer from 'multer';
-import pdfParse from 'pdf-parse';
-import mammoth from 'mammoth';
 import { fileURLToPath } from 'url';
 
 // 强制从“项目根目录”读取 .env（Windows 上更稳）
@@ -92,6 +90,7 @@ async function extractTextFromFile(file: Express.Multer.File): Promise<{
     name.endsWith('.jpeg');
 
   if (isPdf) {
+    const pdfParse = (await import('pdf-parse')).default;
     const data = await pdfParse(file.buffer);
     return { text: (data.text || '').trim(), detectedType: 'pdf' };
   }
@@ -102,6 +101,7 @@ async function extractTextFromFile(file: Express.Multer.File): Promise<{
   }
 
   if (isDocx) {
+    const mammoth = await import('mammoth');
     const { value } = await mammoth.extractRawText({ buffer: file.buffer });
     return { text: (value || '').trim(), detectedType: 'docx' };
   }
