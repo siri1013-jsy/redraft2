@@ -6,6 +6,7 @@ import multer from 'multer';
 import pdfParse from 'pdf-parse';
 import mammoth from 'mammoth';
 import { createWorker } from 'tesseract.js';
+import { fileURLToPath } from 'url';
 
 // 强制从“项目根目录”读取 .env（Windows 上更稳）
 const projectRoot = path.resolve();
@@ -388,7 +389,14 @@ if (hasDist) {
   });
 }
 
-app.listen(PORT, () => {
-  console.log(`Server listening on http://localhost:${PORT}`);
-});
+const currentFilePath = fileURLToPath(import.meta.url);
+const isDirectRun = process.argv[1] && path.resolve(process.argv[1]) === currentFilePath;
+
+if (isDirectRun) {
+  app.listen(PORT, () => {
+    console.log(`Server listening on http://localhost:${PORT}`);
+  });
+}
+
+export default app;
 
