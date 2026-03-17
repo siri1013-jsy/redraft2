@@ -3,7 +3,6 @@ import path from 'path';
 import fs from 'fs';
 import dotenv from 'dotenv';
 import multer from 'multer';
-import { fileURLToPath } from 'url';
 
 // 强制从“项目根目录”读取 .env（Windows 上更稳）
 const projectRoot = path.resolve();
@@ -390,10 +389,7 @@ if (hasDist) {
   });
 }
 
-const currentFilePath = fileURLToPath(import.meta.url);
-const isDirectRun = process.argv[1] && path.resolve(process.argv[1]) === currentFilePath;
-
-if (isDirectRun) {
+if (!process.env.VERCEL) {
   app.listen(PORT, () => {
     console.log(`Server listening on http://localhost:${PORT}`);
   });
